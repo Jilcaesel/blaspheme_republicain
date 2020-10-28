@@ -1,0 +1,102 @@
+\documentclass[20pt]{extarticle}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{sourcesanspro}
+\usepackage{contour}
+\usepackage{tikz}
+
+\geometry{a4paper,landscape,hmargin=0cm,vmargin=0cm}
+\pagestyle{empty}
+\parindent=0pt
+
+\definecolor{artref}{rgb}{0.29,0.37,0.51}
+\definecolor{bleu}{rgb}{0.00,0.333,0.643}
+\definecolor{rouge}{rgb}{0.937,0.255,0.208}
+\newcommand\charliefont{\fontspec{Block Berthold}}
+
+% https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006418556/2020-10-28
+
+\begin{document}
+
+\begin{tikzpicture}[x=1cm,y=-1cm]
+\path (-29.7/2+0.1,-21/2+0.1) coordinate (TL);
+\path ( 29.7/2+0.1,-21/2+0.1) coordinate (TR);
+\path (-29.7/2+0.1, 21/2+0.1) coordinate (BL);
+\path ( 29.7/2+0.1, 21/2+0.1) coordinate (BR);
+\clip (BL) rectangle (TR);
+
+\path (0,-7) node
+ {\Huge\charliefont {\color{bleu}Abolissons} le {\color{rouge}délit} de};
+
+\path (0,-1) node (code) {
+\fboxsep=0.1em \fboxrule=0.05em %
+\fbox{%
+\fboxsep=1em \fboxrule=0.1em %
+\fbox{%
+\begin{minipage}{15cm}
+\sourcesanspro
+\parindent=1em
+\parskip=0.5ex
+
+\noindent\textbf{\color{artref}Code pénal, article 433-5-1}
+
+Le fait, au cours d'une manifestation organisée ou réglementée par les
+autorités publiques, d'outrager publiquement l'hymne national ou le drapeau
+tricolore est puni de 7\,500 euros d'amende.
+
+Lorsqu'il est commis en réunion, cet outrage est puni de six mois
+d'emprisonnement et de 7\,500 euros d'amende.
+\end{minipage}%
+}%
+}%
+};
+
+\newcommand\blasphemerepublicain[2]{%
+\begin{scope}
+\clip #1;
+\path (0,5.8) node[anchor=base]
+ {\Huge\charliefont#2{BLASPHÈME RÉPUBLICAIN!}};
+\end{scope}
+}
+
+\blasphemerepublicain{}{\color{white}\contour{black}}
+\blasphemerepublicain{(-9,8) rectangle (-3,0)}{\color{bleu}}
+\blasphemerepublicain{(3.07,8) rectangle (9,0)}{\color{rouge}}
+
+\newcommand\cfl{\charliefont}
+
+\path (TL) ++(+3,+1.5) node[below,rotate=30,align=center] {%
+ \cfl Parce que\\
+ \cfl c'est vraiment pour\\
+ \cfl la liberté d'expression%
+};
+
+\path (TR) ++(-3,+1.5) node[below,rotate=-30,align=center] {%
+ \cfl Parce que\\
+ \cfl les idées et les symboles\\
+ \cfl n'ont pas besoin de protection%
+};
+
+\path (BL) ++(+3,-1.5) node[above,rotate=-30,align=center] {%
+ \cfl Parce que la République\\
+ \cfl accepte qu'on se moque\\
+ \cfl si on respecte\\
+ \cfl ses lois%
+};
+
+\path (BR) ++(-3,-1.5) node[above,rotate=30,align=center] {%
+ \cfl Parce que ce n'est pas\\
+ \cfl deux poids deux\\
+ \cfl mesures%
+};
+
+\path (code.north west) ++(-0.3,-0.3) coordinate (CTL);
+\path (code.north east) ++(+0.3,-0.3) coordinate (CTR);
+\path (code.south west) ++(-0.3,+0.3) coordinate (CBL);
+\path (code.south east) ++(+0.3,+0.3) coordinate (CBR);
+\draw[line width=0.2em,line cap=round,bleu!50!rouge]
+ (CTL) -- (CBR) (CBL) -- (CTR);
+
+\end{tikzpicture}
+
+\end{document}
